@@ -7,7 +7,9 @@ Skills are self-contained folders that package instructions, scripts, and resour
 > [!NOTE]
 > 'Skills' is actually an Anthropic term used within Claude Code and not adopted by other agent tools, but we love it! OpenAI Codex uses an `AGENTS.md` file to define the instructions for your coding agent. Google Gemini uses 'extensions' to define the instructions for your coding agent in a `gemini-extension.json` file.
 
-## 🎄 Humanity's Last Hackathon (of 2025)
+## Humanity's Last Hackathon (of 2025)
+
+<img src="assets/banner.png" alt="Humanity's Last Hackathon (of 2025)" width="100%">
 
 **December 2025** — We're kicking off this skills library with a community hackathon. Use coding agents to ship real contributions: evaluate models, build datasets, fine-tune LLMs, and earn XP on a community leaderboard.
 
