@@ -31,28 +31,74 @@ Hugging Face skills are compatible with Claude Code, Codex, and Gemini CLI. With
 
 ### Claude Code
 
-1. Register the repository as a plugin marketplace:
+1. Register the repository as a plugin marketplace:  
    ```
    /plugin marketplace add huggingface/skills
    ```
-2. In Claude Code, open **Browse and install plugins** → **huggingface-skills** (the marketplace you just added).
-3. Choose the folder you want (`hf-llm-trainer`, `hf_model_evaluation`, `hf_dataset_creator`, or `hf-paper-publisher`) and select **Install now**.
-4. Prefer commands? After registering the marketplace, run `/plugin install <skill-folder>@huggingface-skills` (for example, `/plugin install hf-llm-trainer@huggingface-skills`).
+
+2. In Claude Code, open  
+   **Browse and install plugins** → **huggingface-skills**  
+   (the marketplace you just added).
+
+3. Choose the folder you want  
+   (`hf-llm-trainer`, `hf_model_evaluation`, `hf_dataset_creator`, or `hf-paper-publisher`)  
+   and select **Install now**.
+
+4. Prefer commands?  
+   After registering the marketplace, run:  
+   ```
+   /plugin install <skill-folder>@huggingface-skills
+   ```
+   For example:  
+   ```
+   /plugin install hf-llm-trainer@huggingface-skills
+   ```
 
 ### Codex
 
-1. Copy or symlink this repository’s `AGENTS.md` file to your Codex profile (default: `~/.codex/AGENTS.md`). Or, set `CODEX_HOME=$(pwd)/.codex` in your workspace to use a project-specific file.
-3. After updating `AGENTS.md`, run `codex --ask-for-approval never "Summarize the current instructions."` to verify the instructions are loaded.
-4. For more details, see the [Codex AGENTS guide](https://developers.openai.com/codex/guides/agents-md).
+1. Copy or symlink this repository’s `AGENTS.md` file to your Codex profile:  
+   (default location:  
+   ```
+   ~/.codex/AGENTS.md
+   ```
+   )  
+   Or, set  
+   ```
+   CODEX_HOME=$(pwd)/.codex
+   ```
+   in your workspace to use a project-specific file.
+
+2. After updating `AGENTS.md`, run:  
+   ```
+   codex --ask-for-approval never "Summarize the current instructions."
+   ```
+   to verify the instructions are loaded.
+
+3. For more details, see the [Codex AGENTS guide](https://developers.openai.com/codex/guides/agents-md).
 
 ### Gemini CLI
 
-1. This repo includes `gemini-extension.json`. Use it as a Gemini CLI extension.
+1. This repo includes `gemini-extension.json`.  
+   Use it as a Gemini CLI extension.
+
 2. Install locally:  
-   `gemini extensions install . --consent`  
+   ```
+   gemini extensions install . --consent
+   ```
    or use the GitHub URL.
-3. Restart Gemini CLI. The extension appears as `huggingface-skills` in `~/.gemini/extensions`. Run `gemini extensions list` to verify.
-7. See [Gemini CLI extensions docs](https://geminicli.com/docs/extensions/#installing-an-extension) for more help.
+
+3. Restart Gemini CLI.  
+   The extension appears as `huggingface-skills` in  
+   ```
+   ~/.gemini/extensions
+   ```
+   Run:  
+   ```
+   gemini extensions list
+   ```
+   to verify.
+
+4. See [Gemini CLI extensions docs](https://geminicli.com/docs/extensions/#installing-an-extension) for more help.
 
 ## Skills
 
@@ -60,10 +106,12 @@ This repository contains a few skills to get you started. You can also contribut
 
 ### Available skills
 
-- `hf_dataset_creator/` – prompts, templates, and scripts for creating structured training data sets.
-- `hf_model_evaluation/` – instructions plus utilities for orchestrating evaluation jobs, generating reports, and mapping metrics.
-- `hf-llm-trainer/` – a comprehensive training skill with `SKILL.md` guidance, helper scripts (e.g., `train_sft_example.py`, `convert_to_gguf.py`, cost estimators).
-- `hf-paper-publisher/` – tools for publishing and managing research papers on Hugging Face Hub. Index papers from arXiv, link papers to models/datasets, generate professional research articles from templates, and manage paper authorship.
+| Skill Folder            | Description                                                                                                                | Documentation                                          |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| `hf_dataset_creator/`   | Prompts, templates, and scripts for creating structured training datasets.                                                 | [SKILL.md](hf_dataset_creator/SKILL.md)                |
+| `hf_model_evaluation/`  | Instructions plus utilities for orchestrating evaluation jobs, generating reports, and mapping metrics.                    | [SKILL.md](hf_model_evaluation/SKILL.md)               |
+| `hf-llm-trainer/`       | Comprehensive training skill with `SKILL.md` guidance, helper scripts (e.g., `train_sft_example.py`, `convert_to_gguf.py`, cost estimators). | [SKILL.md](hf-llm-trainer/SKILL.md)                    |
+| `hf-paper-publisher/`   | Tools for publishing and managing research papers on Hugging Face Hub. Index papers from arXiv, link papers to models/datasets, generate professional research articles from templates, and manage paper authorship. | [SKILL.md](hf-paper-publisher/SKILL.md)                |
 
 ### Using skills in your coding agent
 
