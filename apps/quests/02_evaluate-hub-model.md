@@ -1,66 +1,71 @@
 # Week 1: Evaluate a Hub Model
 
-**Goal:** Add evaluation results to model cards across the Hub. Together, we're building a distributed leaderboard of open source model performance.
+📣 TASK: Add evaluation results to model cards across the Hub. Together, we're building a distributed leaderboard of open source model performance.
 
 >[!NOTE]
-> Bonus XP for contributing to the leaderboard application. Open a PR [on the hub](https://huggingface.co/spaces/hf-skills/distributed-leaderboard/discussions) or [on GitHub](https://github.com/huggingface/skills/blob/main/apps/evals-leaderboard/app.py) to get your XP.
+> Bonus XP for contributing to the leaderboard application. Open a PR [on the hub](https://huggingface.co/spaces/hf-skills/distributed-leaderboard/discussions) or [on GitHub](https://github.com/huggingface/skills/blob/main/apps/evals-leaderboard/app.py) to get your (bonus) XP.
 
 ## Why This Matters
 
-Model cards without evaluation data are hard to compare. By adding structured eval results to `model-index` metadata, we make models searchable, sortable, and easier to choose between. Your contributions power leaderboards and help the community find the best models for their needs. Also, by doing this in a distributed way, we can share our evaluation results with the community.
+Model cards without evaluation data are hard to compare. By adding structured eval results to metadata, we make models easier to compare and review. Your contributions power leaderboards and help the community find the best models for their needs. Also, by doing this in a distributed way, we can share our evaluation results with the community.
+
+## XP Tiers
+
+Taking part is simple. We need to get model authors to show evaluation results in their model cards. This is a clean up job!
+
+| Tier            | XP    | Description                                                   | What Counts                                  |
+|-----------------|-------|---------------------------------------------------------------|-----------------------------------------------|
+| 🐢 Contributor  | 1 XP  | Extract evaluation results from one benchmark and update its model card. | Any PR on the repo with evaluation data.      |
+| 🐕 Evaluator    | 5 XP  | Import scores from third-party benchmarks like Artificial Analysis. | Undefined benchmark scores and merged PRs.    |
+| 🦁 Advanced     | 20 XP| Run your own evaluation with inspect-ai and publish results.   | Original eval run and merged PR.              |
+| 🐉 Bonus        | 20 XP| Contribute to the leaderboard application.                      | Any Merged PR on the hub or GitHub.                  |
 
 ## The Skill
 
 Use `hf_model_evaluation/` for this quest. Key capabilities:
 
-- Extract evaluation tables from existing README content
-- Import benchmark scores from Artificial Analysis
-- Run your own evals with inspect-ai on HF Jobs
-- Update model-index metadata (Papers with Code compatible)
+- Extract evaluation tables from existing README content posted by model authors.
+- Import benchmark scores from [Artificial Analysis](https://artificial.com/).
+- Run your own evals with [inspect-ai](https://github.com/UKGovernmentBEIS/inspect_ai) on [HF Jobs](https://huggingface.co/docs/huggingface_hub/en/guides/jobs).
+- Update model-index metadata in the model card.
 
-```bash
-# Preview what would be extracted
-python hf_model_evaluation/scripts/evaluation_manager.py extract-readme \
-  --repo-id "model-author/model-name" --dry-run
-```
+>[!NOTE]
+> Take a look at the [SKILL.md](https://github.com/huggingface/skills/blob/main/hf_model_evaluation/SKILL.md) for more details.
 
-## XP Tiers
-
-### 🐢 Starter — 50 XP
-
-**Extract evaluation results from one benchmark and update its model card.**
+### Extract Evaluation Tables from README
 
 1. Pick a Hub model without evaluation data from *trending models* on the hub
 2. Use the skill to extract or add a benchmark score
 3. Create a PR (or push directly if you own the model)
 
-**What counts:** One model, one dataset, metric visible in model card metadata.
+The agent will use this script to extract evaluation tables from the model's README.
 
-### 🐕 Standard — 100 XP
+```bash
+python hf_model_evaluation/scripts/evaluation_manager.py extract-readme \
+  --repo-id "model-author/model-name" --dry-run
+```
 
-**Import scores from third-party benchmarks like Artificial Analysis.**
+### Import Scores from Artificial Analysis
 
 1. Find a model with benchmark data on external sites
 2. Use `import-aa` to fetch scores from Artificial Analysis API
 3. Create a PR with properly attributed evaluation data
 
-**What counts:** Undefined benchmark scores and merged PRs.
+The agent will use this script to fetch scores from Artificial Analysis API and add them to the model card.
 
 ```bash
-AA_API_KEY="your-key" python hf_model_evaluation/scripts/evaluation_manager.py import-aa \
+python hf_model_evaluation/scripts/evaluation_manager.py import-aa \
   --creator-slug "anthropic" --model-name "claude-sonnet-4" \
   --repo-id "target/model" --create-pr
 ```
 
-### 🦁 Advanced — 200 XP
-
-**Run your own evaluation with inspect-ai and publish results.**
+### Run your own evaluation with inspect-ai and publish results.
 
 1. Choose an eval task (MMLU, GSM8K, HumanEval, etc.)
 2. Run the evaluation on HF Jobs infrastructure
 3. Update the model card with your results and methodology
 
-**What counts:** Original eval run and merged PR.
+The agent will use this script to run the evaluation on HF Jobs infrastructure and update the model card with the results.
 
 ```bash
 HF_TOKEN=$HF_TOKEN hf jobs uv run hf_model_evaluation/scripts/inspect_eval_uv.py \
