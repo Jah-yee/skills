@@ -772,9 +772,7 @@ def inspect_tables(repo_id: str) -> None:
             print("\nNo evaluation tables detected.")
         else:
             print("\nSuggested next step:")
-            print(f'  uv run scripts/evaluation_manager.py extract-readme --repo-id "{repo_id}" --table <table-number> --dry-run')
-            print("If your model column/row is not an exact match, add:")
-            print('  --model-name-override "<column header or model name from table>"')
+            print(f'  uv run scripts/evaluation_manager.py extract-readme --repo-id "{repo_id}" --table <table-number> [--model-column-index <column-index>]')
 
         print(f"\n{'='*70}\n")
 
