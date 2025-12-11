@@ -111,17 +111,17 @@ The `group` parameter helps organize related runs together in the dashboard side
 
 ```python
 # Example: Group runs by experiment type
-trackio.init(project="my-project", run_name="baseline-run-1", group="baseline")
-trackio.init(project="my-project", run_name="augmented-run-1", group="augmented")
-trackio.init(project="my-project", run_name="tuned-run-1", group="tuned")
+trackio.init(project="my-project", name="baseline-run-1", group="baseline")
+trackio.init(project="my-project", name="augmented-run-1", group="augmented")
+trackio.init(project="my-project", name="tuned-run-1", group="tuned")
 ```
 
 Runs with the same group name can be grouped together in the sidebar, making it easier to compare related experiments. You can group by any configuration parameter:
 
 ```python
 # Hyperparameter sweep - group by learning rate
-trackio.init(project="hyperparam-sweep", run_name="lr-0.001-run", group="lr_0.001")
-trackio.init(project="hyperparam-sweep", run_name="lr-0.01-run", group="lr_0.01")
+trackio.init(project="hyperparam-sweep", name="lr-0.001-run", group="lr_0.001")
+trackio.init(project="hyperparam-sweep", name="lr-0.01-run", group="lr_0.01")
 ```
 
 ## Environment Variables for Jobs
@@ -152,10 +152,10 @@ from datetime import datetime
 
 # Auto-generate run name
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
-run_name = f"sft_qwen25_{timestamp}"
+name = f"sft_qwen25_{timestamp}"
 
 # Project and space_id can come from environment variables
-trackio.init(run_name=run_name, group="SFT")
+trackio.init(name=name, group="SFT")
 
 # ... training code ...
 trackio.finish()
@@ -183,7 +183,57 @@ After starting training:
 2. The Gradio dashboard shows all tracked experiments
 3. Filter by project, compare runs, view charts with smoothing
 
+## MCP Server for Programmatic Access
+
+Trackio provides an MCP (Model Context Protocol) server that enables Claude to query training metrics programmatically. This allows for intelligent monitoring, loss curve analysis, and automated recommendations.
+
+### Enabling the MCP Server
+
+Start the Trackio dashboard with MCP server enabled:
+
+```bash
+# CLI
+trackio show --mcp-server
+
+# Or via Python
+import trackio
+trackio.show(mcp_server=True)
+
+# Or via environment variable
+export GRADIO_MCP_SERVER=True && trackio show
+```
+
+The server runs at `http://127.0.0.1:7860/gradio_api/mcp/` by default.
+
+### MCP Client Configuration
+
+Add to your Claude MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "trackio": {
+      "url": "http://127.0.0.1:7860/gradio_api/mcp/"
+    }
+  }
+}
+```
+
+### Available MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_all_projects` | List all tracked projects |
+| `get_runs_for_project` | List runs within a project |
+| `get_metrics_for_run` | Get available metrics for a run |
+| `get_metric_values` | Fetch metric history (loss curves) |
+| `get_project_summary` | Project overview with run count |
+| `get_run_summary` | Run details with config and metrics |
+
+**See:** `references/trackio_mcp_monitoring.md` for complete MCP monitoring guide including loss curve interpretation and troubleshooting patterns.
+
 ## Recommendation
 
 - **Trackio**: Best for real-time monitoring during long training runs
+- **Trackio MCP**: Best for programmatic monitoring and AI-assisted analysis
 - **Weights & Biases**: Best for team collaboration, requires account
