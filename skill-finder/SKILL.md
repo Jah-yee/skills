@@ -23,12 +23,13 @@ hf_space_search(filter="agent-skill", search="training")
 
 ## Installing Skills
 
-Use the `hf_download` MCP tool to download a skill:
+Use `git clone` to download a skill Space from the Hugging Face Hub:
 
 
 ```python
-# Download a skill space
-hf_download(repo_id="hf-skills/llm-trainer", repo_type="space", local_dir=".<agent_name>/skills/llm-trainer")
+# Clone a skill Space
+# (Spaces are hosted under https://huggingface.co/spaces/<org>/<space>)
+git clone https://huggingface.co/spaces/hf-skills/llm-trainer ".<agent_name>/skills/llm-trainer"
 ```
 
 `<agent-name>` is the name of the agent you are installing the skill for. For example, for 'codex', the local_dir would be '.codex/skills/llm-trainer', and for 'claude', the local_dir would be '.claude/skills/llm-trainer'.
