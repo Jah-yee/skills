@@ -14,11 +14,11 @@ This skill provides tools to manage datasets on the Hugging Face Hub with a focu
 2.1.0
 
 # Dependencies
-- huggingface_hub
-- duckdb (for SQL queries)
-- datasets (for pushing query results to Hub)
-- json (built-in)
-- time (built-in)
+# This skill uses PEP 723 scripts with inline dependency management
+# Scripts auto-install requirements when run with: uv run scripts/script_name.py
+
+- uv (Python package manager)
+- Getting Started: See "Usage Instructions" below for PEP 723 usage
 
 # Core Capabilities
 
@@ -52,16 +52,18 @@ Supports diverse dataset types through template system:
 
 # Usage Instructions
 
-The skill includes two Python scripts:
+The skill includes two Python scripts that use PEP 723 inline dependency management:
+
+> **All paths are relative to the directory containing this SKILL.md
+file.**
+> Scripts are run with: `uv run scripts/script_name.py [arguments]`
+
 - `scripts/dataset_manager.py` - Dataset creation and management
 - `scripts/sql_manager.py` - SQL-based dataset querying and transformation
 
 ### Prerequisites
-- `huggingface_hub` library: `uv add huggingface_hub`
-- `duckdb` library (for SQL): `uv add duckdb`
-- `datasets` library (for pushing): `uv add datasets`
+- `uv` package manager installed
 - `HF_TOKEN` environment variable must be set with a Write-access token
-- Activate virtual environment: `source .venv/bin/activate`
 
 ---
 
