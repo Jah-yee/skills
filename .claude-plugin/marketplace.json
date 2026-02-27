@@ -61,6 +61,12 @@
       "source": "./skills/huggingface-gradio",
       "skills": "./",
       "description": "Build Gradio web UIs and demos in Python. Use when creating or editing Gradio apps, components, event listeners, layouts, or chatbots."
+    },
+    {
+      "name": "feishu-bitable",
+      "source": "./skills/feishu-bitable",
+      "skills": "./",
+      "description": "Use when working with Feishu (飞书) Bitable tables. Supports creating records, querying data, updating rows, and managing Bitable bases. Required for tasks involving Feishu document automation, team databases, or 飞书多维表格 operations."
     }
   ]
 }
